@@ -1,2 +1,2 @@
 var foo = 1;
-window.foo=2
+window.foo = 2
