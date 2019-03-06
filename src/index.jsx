@@ -1,72 +1,53 @@
-// import * as React from "react";
-// import * as ReactDOM from "react-dom";
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import { TodoItem } from './components/TodoItem.jsx';
+import { Game } from './game/game.jsx'
 
-// class App extends React.Component{
-//     constructor(props, state){
-//         super(props, state);
+class App extends React.Component {
 
-//         this.state ={
-//             counter: 0
-//         }
-//     }
-//     render(){
-//         return(
-//             <div>
-//                 <button onClick={()=> this.minus()}>Minus</button>
-//                 <span>{' '}{this.state.counter}{' '}</span>
-//                 <button onClick = {() => {
-//                     this.setState({counter: this.state.counter +1})
-//                 }}>Plus</button>
-//                 </div>
-//         )
-//     }
-//     minus() {
-//         this.setState({
-//             counter: this.state.counter -1
-//         });
-//     }
-// }
+    constructor(props, state) {
+        super(props, state);
+    
+        this.state = {
+            list: [
+                { name: 'aaaa' },
+                { name: 'bbbb' },
+            ]
+        }
+    }
 
-// ReactDOM.render(<App/>, document.getElementById("root"))
+    render() {
+        return (
+            <div>
 
-import React, { Component } from "react";
-import * as ReactDOM from "react-dom";
-import List from "./List";
+                <button onClick={()=> this.playGame()}>Play</button>
+                <button onClick={()=> this.newColor()}>NewColor</button>
+                <button onClick={() => this.addItem()}>Add</button>
+                <ul>
+                    {this.state.list.map((item, i) => (
+                        <TodoItem key={i}
+                                  name={item.name}
+                                  onRemove={() => this.removeItem(i)}/>
+                    ))}
+                </ul>
+            </div>
+        )
+    }
+    playGame(){
+        this.game = new Game;
+    }
+    newColor(){
+        this.game.changeColor()
+    }
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      term: "",
-      items: []
-    };
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-  }
-  onChange(event) {
-    this.setState({ term: event.target.value }, () => {
-    });
-  }
-  onSubmit(event) {
-    event.preventDefault();
-    this.setState({
-      term: "",
-      items: [...this.state.items, this.state.term]
-    });
-  }
-  render() {
-    return (
-      <div>
-        <form className="App" onSubmit={this.onSubmit}>
-        <h1>Welcome</h1>
-            <h3>To your to-do list</h3>
-          <input value={this.state.term} onChange={this.onChange} />
-          <button>Submit</button>
-        </form>
-        <List items={this.state.items} />
-      </div>
-    );
-  }
+    addItem() {
+        this.setState({list: [...this.state.list, {name: 'cccc'}]});
+    }
+
+    removeItem(i) {
+        this.state.list.splice(i, 1);
+        this.setState({list: [...this.state.list]})
+    }
 }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<App/>, document.getElementById('root'));
