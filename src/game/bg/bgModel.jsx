@@ -5,7 +5,7 @@ export class BgModel extends Model {
         this.text = 'Play';
     }
 
-    setWinText() {
-        this.text = 'win';
+    setLoseText() {
+        this.text = 'GameOver';
     }
 }
