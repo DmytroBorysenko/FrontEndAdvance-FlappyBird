@@ -3,11 +3,12 @@ import * as ReactDOM from 'react-dom';
 import { TodoItem } from './components/TodoItem.jsx';
 import { Game } from './game/game.jsx'
 
+
 class App extends React.Component {
 
     constructor(props, state) {
         super(props, state);
-    
+         this.game = new Game()
         this.state = {
             list: [
                 { name: 'aaaa' },
@@ -20,7 +21,7 @@ class App extends React.Component {
         return (
             <div>
 
-                <button onClick={()=> this.playGame()}>Play</button>
+                {/* <button onClick={()=> this.playGame()}>Play</button>
                 <button onClick={()=> this.newColor()}>NewColor</button>
                 <button onClick={() => this.addItem()}>Add</button>
                 <ul>
@@ -29,13 +30,11 @@ class App extends React.Component {
                                   name={item.name}
                                   onRemove={() => this.removeItem(i)}/>
                     ))}
-                </ul>
+                </ul> */}
             </div>
         )
     }
-    playGame(){
-        this.game = new Game;
-    }
+   
     newColor(){
         this.game.changeColor()
     }
