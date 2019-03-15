@@ -5,6 +5,21 @@ import { CircleView } from "./circleView.jsx";
 export class CircleCtrl extends Ctrl {
   constructor() {
     super(new CircleModel(), new CircleView());
+    document.addEventListener('keydown', (e) => {
+      if (e.keyCode === 38) {
+          this.moveUp();
+      }
+      if (e.keyCode === 40) {
+          this.moveDown();
+      }
+      if (e.keyCode === 37) {
+        this.moveLeft();
+    }
+    if (e.keyCode === 39) {
+      this.moveRight();
+  }
+
+});
   }
   moveUp() {
     this.model.moveUp();

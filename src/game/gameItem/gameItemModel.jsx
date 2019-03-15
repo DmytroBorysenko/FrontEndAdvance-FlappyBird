@@ -14,17 +14,17 @@ export class GameItemModel extends Model {
     this.type = `#${color}`;
   }
   moveUp() {
-    this.position.y -= 1;
+    this.position.y -= 10;
   }
 
   moveDown() {
-    this.position.y += 1;
+    this.position.y += 10;
   }
   moveLeft() {
-    this.position.x -= 1;
+    this.position.x -= 10;
   }
   moveRight() {
-    this.position.x += 1;
+    this.position.x += 10;
   }
   isWin() {
     return this.position.y < 0 || this.position.y > this.HEIGH;

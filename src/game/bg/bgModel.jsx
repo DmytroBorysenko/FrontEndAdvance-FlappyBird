@@ -1,11 +1,14 @@
 import {Model} from "../mvc/Model.jsx";
+import {stateMachine} from "../stateMachine.jsx";
+
+window.stateMachine = stateMachine;
 
 export class BgModel extends Model {
     setDefaultValues() {
-        this.text = 'Play';
+        this.text = ' ';
     }
 
-    setLoseText() {
-        this.text = 'GameOver';
+    setWinText(text) {
+        this.text = text;
     }
 }
