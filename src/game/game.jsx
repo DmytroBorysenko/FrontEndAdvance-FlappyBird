@@ -3,11 +3,12 @@ import { BgCtrl } from "./bg/bgCtrl.jsx";
 import { CircleCtrl } from "./Circle/circleCtrl.jsx";
 import { stateMachine } from "./stateMachine.jsx";
 
+
 export class Game {
   constructor() {
     const config = JSON.parse(window.localStorage.getItem('config'));
     const sessionStorage = JSON.parse(window.sessionStorage.getItem('config'));
-
+    
     console.log(config);
     console.log('sessionStorage', sessionStorage);
 

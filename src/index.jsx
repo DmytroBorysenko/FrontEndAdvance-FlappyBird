@@ -2,6 +2,8 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { TodoItem } from "./components/TodoItem.jsx";
 import { Game } from "./game/game.jsx";
+import { agent } from "./utils/agent.jsx"
+import {Players} from "./components/Players";
 
 class App extends React.Component {
   constructor(props, state) {
@@ -15,7 +17,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <input type="text" onChange={e => this.storeData(e.target.value)} />
+
+          <Players/>
+        {/* <input type="text" onChange={e => this.storeData(e.target.value)} />
         <button onClick={() => this.playGame()}>Play</button>
         <button onClick={() => this.newColor()}>NewColor</button>
         <button onClick={() => this.addItem()}>Add</button>
@@ -27,7 +31,7 @@ class App extends React.Component {
               onRemove={() => this.removeItem(i)}
             />
           ))}
-        </ul>
+        </ul> */}
       </div>
     );
   }

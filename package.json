@@ -5,6 +5,7 @@
   "main": "index.jsx",
   "scripts": {
     "start": "webpack-dev-server",
+    "build":"webpack --mode=production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,6 +21,7 @@
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^2.1.0",
@@ -35,6 +37,7 @@
   "dependencies": {
     "javascript-state-machine": "^3.1.0",
     "react": "^16.8.3",
-    "react-dom": "^16.8.3"
+    "react-dom": "^16.8.3",
+    "superagent": "^4.1.0"
   }
 }
