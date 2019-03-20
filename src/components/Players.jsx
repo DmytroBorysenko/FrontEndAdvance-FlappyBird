@@ -1,6 +1,6 @@
 import * as React from "react";
 import { agent } from "../utils/agent";
-
+import "./Players.scss";
 export class Players extends React.Component {
   constructor(p, s) {
     super(p, s);
@@ -14,24 +14,24 @@ export class Players extends React.Component {
 
   render() {
     return (
-
-    <div>
+    <div id="players">
                 {JSON.stringify(this.state.newPlayer)}
                 <div>
                     <label>Name: </label>
-                    {/* <input type="text" onChange={(e) => this.changeNewPlayerName(e.target.value)}/> */}
+                    <input type="text" onChange={(e) => this.changeNewPlayerName(e.target.value)}/>
                 </div>
 
                 <div>
                     <label>Age: </label>
-                    {/* <input type="text" onChange={(e) => this.changeNewPlayerAge(e.target.value)}/> */}
+                    <input type="text" onChange={(e) => this.changeNewPlayerAge(e.target.value)}/>
                 </div>
 
                 <button onClick={() => this.addNewPlayer()}>Add</button>
 
                 <ul>
                     {this.state.players.map((player, i) => {
-                        return (<li key={i}>name: {player.name}, age: {player.age}</li>)
+                        return (<li key={i}>name: {player.name}, age: {player.age}
+                        <button onClick={() => this.delPlayer(i)}>del</button></li>)
                     })}
                 </ul>
             </div>
@@ -59,9 +59,18 @@ export class Players extends React.Component {
             }
         )
     }
+    delPlayer(index){
+        this.state.players.splice(index, 1)
+        agent.Player.del(
+            this.state.players,
+            () => {
+                this.loadAll();
+            }
+        )
+    }
 
   async loadAll() {
-    const players = await agent.Player.getALL();
+    const players = await agent.Player.getAll();
     this.setState({ players });
   }
 }
