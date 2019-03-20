@@ -17,7 +17,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div class="container">
 
           <Players/>
         {/* <input type="text" onChange={e => this.storeData(e.target.value)} />
