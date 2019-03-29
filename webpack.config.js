@@ -1,36 +1,28 @@
 var path = require('path');
-var hwp = require('html-webpack-plugin');
+const HtmlWebPackPlugin = require("html-webpack-plugin");
 
-module.exports = (env, options) => {
-    return {
-        entry: "./src/index.jsx",
-        output: {
-            path: path.join(__dirname, './dist'),
-            filename: '[name].build.js'
-        },
-        module: {
-            rules: [
-                {
-                    test: /\.scss$/,
-                    use: [
-                        "style-loader", 
-                        "css-loader", 
-                        "sass-loader" 
-                    ]
-                },
-                {
-                    test: /\.(jsx)$/,
-                    exclude: /node_modules/,
-                    use:  "babel-loader"
-                }
-            ]
-        },
-        plugins: [
-            new hwp({template: path.join(__dirname, './src/index.html')})
-        ],
-        devtool: "source-map",
-        resolve: {
-            extensions: ['.js', '.jsx'],
-        }
-    }
-};
+const htmlPlugin = new HtmlWebPackPlugin({
+  template: "./src/index.html",
+  filename: "./index.html"
+});
+
+
+module.exports = {
+       entry: './src/index.jsx',
+    output: {
+      path: path.resolve(__dirname, 'dist'),
+      filename: 'build.js'
+    },
+    module: {
+        rules: [
+          {
+            test: /\.(jsx)$/,
+            exclude: /node_modules/,
+            use: {
+              loader: "babel-loader"
+            }
+          }
+        ]
+    },
+    plugins: [htmlPlugin],
+  };

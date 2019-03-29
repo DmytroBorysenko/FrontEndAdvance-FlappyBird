@@ -1,14 +1,15 @@
-import {Model} from "../mvc/Model.jsx";
-import {stateMachine} from "../stateMachine.jsx";
+import { Model } from "../mvc/model.jsx";
 
-window.stateMachine = stateMachine;
 
-export class BgModel extends Model {
-    setDefaultValues() {
-        this.text = ' ';
+export class BgModel extends Model{
+    setDefaultValues(){
+        this.bg = new Image();
+        this.bg.src = '../../../static/bg.png'
+        this.gameOver = " ";
+        this.play = " ";
+        }
+        lose(){
+            this.gameOver = "Game Over"
+        }
     }
-
-    setWinText(text) {
-        this.text = text;
-    }
-}
+    

@@ -1,38 +1,74 @@
-import { GameItemCtrl } from "./gameItem/gameItemCtrl.jsx";
 import { BgCtrl } from "./bg/bgCtrl.jsx";
-import { CircleCtrl } from "./Circle/circleCtrl.jsx";
-import { stateMachine } from "./stateMachine.jsx";
+import { FgCtrl } from "./fg/fgCtrl.jsx";
+import { BirdCtrl } from "./bird/birdCtrl.jsx";
+import { PipeCtrl } from "./pipes/pipeCtrl.jsx";
+import { stateMachine } from "./stateMachin.jsx";
+
+
 
 
 export class Game {
-  constructor() {
-    const config = JSON.parse(window.localStorage.getItem('config'));
-    const sessionStorage = JSON.parse(window.sessionStorage.getItem('config'));
-    
-    console.log(config);
-    console.log('sessionStorage', sessionStorage);
+    constructor(){
+        this.canvas = document.getElementById("flappy")
+        this.ctx = this.canvas.getContext("2d")
+           
+        this.canvas.width = 288;
+        this.canvas.height = 512;
+        
+        this.items = [];
+        this.bg = new BgCtrl();
+        this.fg = new FgCtrl();
+        this.bird = new BirdCtrl();
+        this.pipe = new PipeCtrl();
+        this.gamePlaing="start"
+        this.items.push(...[this.bg,this.pipe,this.fg,this.bird]);
+        this.draw()
 
-    this.canvas = document.getElementById("game");
-    this.ctx = this.canvas.getContext("2d");
+        document.addEventListener("keypress", ()=>{
+            if (this.gamePlaing==="end" || this.gamePlaing==="start"){
+                this.gamePlaing="play"
+                this.play();    
+            }
+            })
+    }
 
-    this.canvas.width = 300;
-    this.canvas.height = 300;
-    this.items = [];
-    this.mainCharacter = new GameItemCtrl("red", [0, 0, 10, 10]);
-    this.bg = new BgCtrl();
-    this.circle = new CircleCtrl();
-    this.items.push(...[this.mainCharacter, this.bg, this.circle]);
+    play(){
+            this.pipe.model.setDefaultValues()
+            this.bird.model.setDefaultValues()
+            this.bg.model.setDefaultValues()
+    }
+    start(){
+        if(this.gamePlaing === "start"){
+                this.pipe.model.pipe.length = 0
+                this.bird.model.grav = 0
+                this.bg.model.play = "Play"
+                
 
-    this.draw();
-  }
+   }
+    }
+    draw(){
+        this.start();
+        this.lose()
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.items.forEach(item => item.animate(this.ctx));
+        requestAnimationFrame(() => this.draw());
+    }
+   
+    lose(){
+        this.pipe.model.pipe.forEach((arr)=>{
+            if(this.bird.model.position.x + this.bird.model.bird.width >= arr.x &&
+                this.bird.model.position.x <=arr.x + this.pipe.model.pipeUp.width &&
+                (this.bird.model.position.y <= arr.y + this.pipe.model.pipeUp.height||
+                    this.bird.model.position.y +  this.bird.model.bird.height >= arr.y + this.pipe.model.pipeUp.height + this.pipe.model.gap) 
+                    || this.bird.model.position.y + this.bird.model.bird.height >= this.canvas.height - this.fg.model.fg.height){
+                        this.pipe.model.remove()
+                        this.bird.model.lose()
+                        this.bg.model.lose()
+                        this.gamePlaing = "end";     
+                    }
+            
+        })
+     }
+     
+     }
 
-  changeColor() {
-    this.items.forEach(item => item.setNewColor());
-  }
-  draw() {
-    this.ctx.fillStyle;
-    this.ctx.clearRect(0, 0, 300, 300);
-    this.items.forEach(item => item.animate(this.ctx));
-    requestAnimationFrame(() => this.draw());
-  }
-}
