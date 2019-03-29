@@ -30,6 +30,12 @@ export class Game {
                 this.play();
             }
         })
+        this.canvas.addEventListener("touchend", () => {
+            if (this.gamePlaing === "end" || this.gamePlaing === "start") {
+                this.gamePlaing = "play"
+                this.play();
+            }
+        },)
     }
 
     play() {

@@ -13,6 +13,10 @@ export class BirdCtrl extends Ctrl {
                 this.model.moveUp()
             }
         })
+        window.addEventListener('touchend', () => {
+            this.model.moveUp()
+
+        },)
     }
 
     animate(ctx) {
