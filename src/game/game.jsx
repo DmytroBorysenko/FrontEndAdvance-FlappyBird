@@ -35,7 +35,7 @@ export class Game {
                 this.gamePlaing = "play"
                 this.play();
             }
-        },)
+        })
     }
 
     play() {
