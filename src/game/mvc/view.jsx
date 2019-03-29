@@ -3,5 +3,5 @@ export class View {
         this.model = model;
     }
 
-    animate(ctx) {}
+    animate(ctx) { }
 }

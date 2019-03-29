@@ -8,21 +8,21 @@ const htmlPlugin = new HtmlWebPackPlugin({
 
 
 module.exports = {
-       entry: './src/index.jsx',
-    output: {
-      path: path.resolve(__dirname, 'dist'),
-      filename: 'build.js'
-    },
-    module: {
-        rules: [
-          {
-            test: /\.(jsx)$/,
-            exclude: /node_modules/,
-            use: {
-              loader: "babel-loader"
-            }
-          }
-        ]
-    },
-    plugins: [htmlPlugin],
-  };
+  entry: './src/index.jsx',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'build.js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
+      }
+    ]
+  },
+  plugins: [htmlPlugin],
+};
